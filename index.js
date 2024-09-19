@@ -2,7 +2,6 @@ console.log("hi");
 
 function getComputerChoice(){
     let a=Math.random()*100;
-    console.log(a);
     if(a>=0 && a<34){
         return "rock";
     }else if(a>=34 && a<67){
@@ -63,6 +62,19 @@ function playround(){
 }
 
 
+function playgame(a=5){
+ while(a!=0){
+    playround();
+    a--;
+ }
+ if(humanscore==comscore){
+   console.log("Ahh! it's a tie!");
+ }else if(humanscore<comscore){
+    console.log("Seems like you lost! better luck next time!");
+ }else{
+    console.log("Yay! you won! congratulations!");
+ }
+}
 
-playround();
+playgame();
 
