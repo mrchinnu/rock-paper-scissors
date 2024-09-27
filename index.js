@@ -11,70 +11,68 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
- let a=window.prompt("Choose 1-rock 2-paper 3-scissors (Enter only the number)");
- if(a==1){
-    return "rock";
- }else if(a==2){
-    return "paper";
- }else if(a==3){
-    return "scissors";
- }else{
-    alert("please enter valid options only(1-rock 2-paper 3-scissors)");
-   return getHumanChoice();
- }
-}
+
 
 let humanscore=0;
 let comscore=0;
+const res=document.querySelector(".results");
 
-function playround(){
-    
+
+function playround(humanchoice){
+    const ele=document.createElement("p");
     let comchoice=getComputerChoice();
-    let humanchoice=getHumanChoice();
     if(humanchoice==comchoice){
-        console.log("tie");
+
     }else if(humanchoice=="rock"){
         if(comchoice=="paper"){
             comscore++;
-            console.log("You loose.paper beats rock!");
         }else{
             humanscore++;
-            console.log("You win.rock beats scissors!");
         }
     }else if(humanchoice=="paper"){
         if(comchoice=="scissors"){
             comscore++;
-            console.log("You loose.scissors beats paper!");
         }else{
             humanscore++;
-            console.log("You win.paper beats rock!");
+           
         }
     }else{
         if(comchoice=="rock"){
             comscore++;
-            console.log("You loose.rock beats scissors!");
+            
         }else{
             humanscore++;
-            console.log("You win.scissors beats paper!");
+            
         }
+    }
+    ele.innerHTML="Human: "+humanscore+" points"+"\nCom: "+comscore+" points";
+    res.appendChild(ele);
+    if(humanscore===5 || comscore===5){
+        const ele1=document.createElement("p");
+        if(humanscore===5){
+                ele1.innerHTML="YAY! you won";
+        }
+        if(comscore===5){
+                ele1.innerHTML="Seems like you lost! better luck next time!";
+        }
+        res.appendChild(ele1);
+        humanscore=0;
+        comscore=0;
     }
 }
 
 
-function playgame(a=5){
- while(a!=0){
-    playround();
-    a--;
- }
- if(humanscore==comscore){
-   console.log("Ahh! it's a tie!");
- }else if(humanscore<comscore){
-    console.log("Seems like you lost! better luck next time!");
- }else{
-    console.log("Yay! you won! congratulations!");
- }
-}
 
-playgame();
+const btn=document.querySelector(".hc");
+
+btn.addEventListener("click" , (event) => {
+    let hc=event.target;
+    if(hc.value===undefined){
+        alert("please click on the buttons visible on screen to make the choice.");
+        return
+    }
+    let hcv=hc.value;
+    playround(hcv);
+})
+
 
